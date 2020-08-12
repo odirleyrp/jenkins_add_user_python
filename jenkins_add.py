@@ -3,26 +3,23 @@
 #12/06/2020
 
 
-#import os.path
+#### Modulos
 import os
-#import shutil
-#import subprocess
-#import time
-
 ###########
 
+### Variaveis
 jenkins_grupo = open('tmp/grupo.txt')
 jenkins_jobs = 'tmp/jobs.txt'
 jenkins_user = 'tmp/user.txt'
 jenkins_url = 'http://10.26.29.2:8081/'
-
+#######
 
 #Converter arquivo da variavel jenkins_grupo em uma lista python
 converte_grupo = [converte_grupo.strip() for converte_grupo in jenkins_grupo]
 jenkins_grupo.close()
 lista_jenkins_grupo = sorted(set(converte_grupo))
 
-# 5-  Coleta os jobs dos  Grupos listados na variavel L_GRUPO e envia  o nome de todos os jos para o  arquivo definido na variavel L_JOBS. Utiliza o grep para coletar apenas os nomes
+#   Coleta os jobs dos  Grupos listados na variavel L_GRUPO e envia  o nome de todos os jos para o  arquivo definido na variavel L_JOBS. Utiliza o grep para coletar apenas os nomes
 #GRUPO = 'bora-2''
 # VERIFICAR A confuguração de lista no python ou dicionario
 for GRUPO in lista_jenkins_grupo :
@@ -31,7 +28,7 @@ for GRUPO in lista_jenkins_grupo :
     os.system("java -jar jenkins-cli.jar -s {} -auth admin:admin get-view {}  |grep string  |cut -d '>' -f 2 |cut  -d '<' -f 1  >> {} "   .format(jenkins_url, GRUPO, jenkins_jobs))
     #os.system("java -jar jenkins-cli.jar -s http://10.26.29.2:8081/ -uth admin:admin get-view {}  |grep string  |cut -d '>' -f 2 |cut  -d '<' -f 1 >> tmp/jobs.txt"   .format(GRUPO))
 
-#6 -
+# -
 #Converter arquivo da variavel 'lista_jobs' em uma lista python
 converte_jobs = [converte_jobs.strip() for converte_jobs in open(jenkins_jobs)]
 #jenkins_jobs.close()
