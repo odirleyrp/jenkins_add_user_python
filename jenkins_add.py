@@ -1,3 +1,8 @@
+# Projeto para automatizar a criação de usuarios no Jenkins.
+#odirleyrp@gmail.
+#12/06/2020
+
+
 import os.path
 import os
 import shutil
