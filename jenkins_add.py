@@ -7,8 +7,7 @@ import time
 ###########
 
 jenkins_grupo = open('tmp/grupo.txt')
-jenkins_jobs = 'tmp/jobs7.txt'
-jenkins_jobs_envio = 'tmp/jobs_envio.txt'
+jenkins_jobs = 'tmp/jobs.txt'
 jenkins_user = 'tmp/user.txt'
 jenkins_url = 'http://10.26.29.2:8081/'
 
@@ -32,12 +31,11 @@ for GRUPO in lista_jenkins_grupo :
 converte_jobs = [converte_jobs.strip() for converte_jobs in open(jenkins_jobs)]
 #jenkins_jobs.close()
 lista_jenkins_jobs = sorted(set(converte_jobs))
-#Criado essa variavel final 'envio' para quardar em listas os nomes de todos os jobs para envio
-lista_jenkins_jobs_envio = sorted(set(converte_jobs))
 
 
 
-# 7 - Lê a lista convertida dos jobs, e baixa cada JOB jogando para um arquivo .xml correspondente ao nome
+
+# Lê a lista convertida dos jobs, e baixa cada JOB jogando para um arquivo .xml correspondente ao nome
 for JOBS in lista_jenkins_jobs:
     JOBS = JOBS.rstrip()
     os.system("java -jar jenkins-cli.jar -s {} -auth admin:admin get-job {} > tmp/{}.xml" .format(jenkins_url, JOBS, JOBS))
@@ -50,11 +48,9 @@ lista_jenkins_user = sorted(set(converte_user))
 
 #print(lista_jenkins_user)
 
-#8 - Realizar o bkp do arquivo de jobs, pois será retirado mais abaixo tudo que for *prd
-os.system("cp {} {}" .format(jenkins_jobs, jenkins_jobs_envio))
 
 ####
-# 9- verificar se o usuario existe nos arquivos dos jobs *.xml, se não ele insere nos arquivos.
+# verificar se o usuario existe nos arquivos dos jobs *.xml, se não ele insere nos arquivos.
 print(lista_jenkins_jobs)
 
 for USUARIO in lista_jenkins_user:
